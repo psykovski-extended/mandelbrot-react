@@ -23,10 +23,10 @@ const Mandelbrot = () => {
             />
         </div>
     );
-}
+};
 
 const mapStateToProps = state => {
-    
+
 }
 
 export default connect(null)(Mandelbrot);
