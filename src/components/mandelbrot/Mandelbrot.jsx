@@ -11,15 +11,21 @@ const Mandelbrot = (props) => {
         props.recalculateMandelbrotAction(-2, 2, -2, 2, 300);
     }, []);
 
-    const processRelayout = (restyleData) => {
+    const handleRelayout = (restyleData) => {
         if(!!restyleData['xaxis.range[0]']) {
             console.log(restyleData);
-            props.recalculateMandelbrotAction(-2, 2, -2, 2, 300);
+            props.recalculateMandelbrotAction(
+                restyleData['xaxis.range[0]'],
+                restyleData['xaxis.range[1]'],
+                restyleData['yaxis.range[0]'],
+                restyleData['yaxis.range[1]'], 500);
         }
     }
-    let xTicks = [];
+
+    let xTicks = [], yTicks = [];
     for(let i = 0; i<1024; i++) {
-        xTicks[i] = -2 + 4/1024 * i;
+        xTicks[i] = props.x_start + (props.x_end - props.x_start)/1024 * i;
+        yTicks[i] = props.y_start + (props.y_end - props.y_start)/1024 * i;
     }
 
     return (
@@ -29,7 +35,7 @@ const Mandelbrot = (props) => {
                 {
                     z: props.mandelbrotData,
                     x: xTicks, // modify with state
-                    y: xTicks,
+                    y: yTicks,
                     colorscale: 'Viridis',
                     type: 'heatmap'
                 },
@@ -50,7 +56,7 @@ const Mandelbrot = (props) => {
                 }} //, plot_bgcolor:"black", paper_bgcolor:"#FFF3"}}
                 useResizeHandler
                 style={{width: "100%", height: "100%"}}
-                //onRelayout={processRelayout}
+                onRelayout={handleRelayout}
                 config={{scrollZoom: true}}
             />
         </div>
@@ -59,7 +65,11 @@ const Mandelbrot = (props) => {
 
 const mapStateToProps = state => {
     return {
-        mandelbrotData: state.mandelbrotData
+        mandelbrotData: state.mandelbrotData.image,
+        x_start: state.mandelbrotData.x_start,
+        x_end: state.mandelbrotData.x_end,
+        y_start: state.mandelbrotData.y_start,
+        y_end: state.mandelbrotData.y_end,
     }
 }
 

@@ -18,6 +18,6 @@ const recalculateMandelbrot = gpu.createKernel(function(x_start, x_end, y_start,
         }
     }
     return iters;
-}).setOutput([1024, 1024]);
+}).setOutput([1024, 1024]).setPrecision('single');
 
 export default recalculateMandelbrot;
