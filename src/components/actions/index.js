@@ -8,7 +8,15 @@ export const recalculateMandelbrotAction = (x_start, x_end, y_start, y_end, iter
             x_start,
             x_end,
             y_start,
-            y_end
+            y_end,
+            iterations
         }
     };
 };
+
+export const updateIterations = iterations => {
+    return {
+        type: 'UPDATE_ITERATIONS',
+        payload: iterations
+    }
+}

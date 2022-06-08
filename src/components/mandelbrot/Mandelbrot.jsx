@@ -5,20 +5,18 @@ import { connect } from "react-redux";
 import { recalculateMandelbrotAction } from "../actions";
 
 const Mandelbrot = (props) => {
-    console.log(props)
-
     useEffect(() => {
-        props.recalculateMandelbrotAction(-2, 2, -2, 2, 300);
+        props.recalculateMandelbrotAction(-2, 2, -2, 2, 100);
     }, []);
 
     const handleRelayout = (restyleData) => {
         if(!!restyleData['xaxis.range[0]']) {
-            console.log(restyleData);
             props.recalculateMandelbrotAction(
                 restyleData['xaxis.range[0]'],
                 restyleData['xaxis.range[1]'],
                 restyleData['yaxis.range[0]'],
-                restyleData['yaxis.range[1]'], 500);
+                restyleData['yaxis.range[1]'],
+                props.iterations);
         }
     }
 
@@ -34,9 +32,9 @@ const Mandelbrot = (props) => {
                 data={[
                 {
                     z: props.mandelbrotData,
-                    x: xTicks, // modify with state
+                    x: xTicks,
                     y: yTicks,
-                    colorscale: 'Viridis',
+                    colorscale: 'Portland',
                     type: 'heatmap'
                 },
                 ]}
@@ -53,8 +51,7 @@ const Mandelbrot = (props) => {
                         scaleanchor: 'x'
                     },
                     paper_bgcolor: '#222'
-                }} //, plot_bgcolor:"black", paper_bgcolor:"#FFF3"}}
-                useResizeHandler
+                }}
                 style={{width: "100%", height: "100%"}}
                 onRelayout={handleRelayout}
                 config={{scrollZoom: true}}
@@ -70,6 +67,7 @@ const mapStateToProps = state => {
         x_end: state.mandelbrotData.x_end,
         y_start: state.mandelbrotData.y_start,
         y_end: state.mandelbrotData.y_end,
+        iterations: state.mandelbrotData.iterations
     }
 }
 

@@ -1,3 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+.sidebar * {
+    font-family: 'Roboto Mono', monospace;
+
+    color: antiquewhite;
+}
+
 .sidebar {
     width: 20vw;
+    background-color: #040404;
+}
+
+.sidebar .outer_wrapper {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .outer_wrapper h3 {
+    margin: 1.5rem 0 .5rem 0;
+}
+
+.sidebar .outer_wrapper h1 {
+    margin: 0;
+
+    color: cadetblue;
+
+    text-align: center;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar input {
+    padding: 5px;
+    height: 25px;
+    border-radius: 20px;
+    border: none;
+
+    background-color: #242a44;
+
+    text-align: center;
+    width: 90%;
+}
+
+.content_wrapper {
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
